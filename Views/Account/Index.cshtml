@@ -1,0 +1,17 @@
+@model AccountPageViewModel
+@{ ViewData["Title"] = Model.ShowLogin ? "Sign in demo" : "Registration demo"; }
+<section class="page-hero"><div class="container"><p class="eyebrow">Frontend preview</p><h1>@(Model.ShowLogin ? "Sign-in interaction" : "Registration interaction")</h1><p>No account is required and nothing entered here is stored.</p></div></section>
+<section class="form-section"><div class="container narrow">
+@if (Model.ShowLogin)
+{
+    <form class="panel-form" asp-action="Login" method="post" asp-antiforgery="false">
+        <label>Email address<input asp-for="Login.Email"/></label><label>Password<input asp-for="Login.Password"/></label><button class="button" type="submit">Continue to demo</button><p class="form-switch">Try the other view: <a asp-action="Index">Registration</a></p>
+    </form>
+}
+else
+{
+    <form class="panel-form" asp-action="Register" method="post" asp-antiforgery="false">
+        <label>Full name<input asp-for="Register.FullName"/></label><label>Email address<input asp-for="Register.Email"/></label><label>Password<input asp-for="Register.Password"/></label><button class="button" type="submit">Continue to demo</button><p class="form-switch">Try the other view: <a asp-action="Index" asp-route-mode="login">Sign in</a></p>
+    </form>
+}
+</div></section>

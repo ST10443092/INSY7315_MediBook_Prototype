@@ -1,0 +1,8 @@
+@model AppointmentRecord
+<article class="appointment-row"><div class="time-chip">@Model.Time</div><div class="patient-info"><strong>@Model.User.FullName</strong><span>@Model.Reason</span><small>@Model.User.Email</small></div><span class="appointment-status @Model.Status.ToLower()">@Model.Status</span><div class="appointment-actions">
+@if (Model.Status == "Confirmed")
+{
+    <form asp-action="UpdateStatus" asp-route-id="@Model.Id" method="post" asp-antiforgery="false"><input type="hidden" name="status" value="Completed"/><button type="submit">Complete</button></form>
+    <form asp-action="UpdateStatus" asp-route-id="@Model.Id" method="post" asp-antiforgery="false"><input type="hidden" name="status" value="Cancelled"/><button class="danger" type="submit">Cancel</button></form>
+}
+</div></article>

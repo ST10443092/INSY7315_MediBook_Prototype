@@ -1,0 +1,7 @@
+@model DoctorProfileViewModel
+@{ ViewData["Title"] = "Practice profile"; }
+<section class="portal-hero compact"><div class="container"><div><p class="eyebrow">Doctor workspace</p><h1>Practice profile</h1><p>Try editing the information patients see.</p></div></div></section><div class="container"><partial name="_DoctorNav"/></div>
+<section class="portal-content"><div class="container narrow"><form class="panel-form" asp-action="Profile" method="post" asp-antiforgery="false">
+@if (ViewBag.Saved == true) { <div class="success">Demo profile updated for this view.</div> }
+<label>Display name<input asp-for="Name"/></label><label>Specialty<input asp-for="Specialty"/></label><label>Account email<input asp-for="Email"/></label><label>Practice phone<input asp-for="Phone"/></label><button class="button" type="submit">Save profile</button>
+</form></div></section>

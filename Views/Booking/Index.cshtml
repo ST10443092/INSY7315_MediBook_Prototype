@@ -1,0 +1,18 @@
+@model BookingPageViewModel
+@{ ViewData["Title"] = "Book an appointment"; }
+<section class="page-hero"><div class="container"><p class="eyebrow">Book your visit</p><h1>Choose a time that suits you</h1><p>This interactive preview does not save or send your information.</p></div></section>
+<section class="form-section"><div class="container booking-layout">
+<aside class="doctor-summary"><p class="eyebrow">Demo appointments</p><h2>Coming up</h2>
+@foreach (var item in Model.Appointments)
+{
+    <div class="saved-booking"><strong>@item.Doctor.Name</strong><span>@item.Date.ToString("ddd, d MMM yyyy") at @item.Time</span><small>@item.Reason</small></div>
+}
+</aside>
+<form class="panel-form" asp-action="Index" method="post" asp-antiforgery="false">
+@if (ViewBag.Confirmed == true) { <div class="success">Appointment preview confirmed. Nothing was stored.</div> }
+<label>Doctor<select asp-for="Booking.DoctorId">@foreach (var doctor in Model.Doctors) { <option value="@doctor.Id">@doctor.Name — @doctor.Specialty</option> }</select></label>
+<label>Date<input asp-for="Booking.Date"/></label>
+<label>Time<select asp-for="Booking.Time"><option>09:00</option><option>10:30</option><option>14:00</option><option>15:30</option></select></label>
+<label>Reason<textarea asp-for="Booking.Reason" rows="4"></textarea></label>
+<button class="button" type="submit">Confirm preview</button>
+</form></div></section>

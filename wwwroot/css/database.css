@@ -1,0 +1,1 @@
+.saved-booking{display:grid;gap:2px;padding:13px 0;border-top:1px solid var(--line)}.saved-booking span,.saved-booking small{color:var(--muted);font-size:12px}.doctor-grid{align-items:stretch}.doctor-card{display:flex;max-width:none;flex-direction:column}.doctor-card .doctor-details{margin-top:auto}

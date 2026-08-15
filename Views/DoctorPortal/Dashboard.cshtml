@@ -1,0 +1,47 @@
+@model DoctorDashboardViewModel
+@{ ViewData["Title"] = "Doctor dashboard"; }
+<section class="portal-hero">
+    <div class="container">
+        <div><p class="eyebrow">Doctor workspace</p><h1>Good day, @Model.Doctor.Name</h1><p>Here’s what your practice looks like today.</p></div>
+        <form asp-action="ToggleAvailability" method="post" asp-antiforgery="false"><button class="availability-toggle @(Model.Doctor.IsAvailable ? "online" : "offline")" type="submit"><i></i>@(Model.Doctor.IsAvailable ? "Accepting appointments" : "Not accepting appointments")</button></form>
+    </div>
+</section>
+<div class="container"><partial name="_DoctorNav" /></div>
+<section class="portal-content"><div class="container">
+    <div class="stat-grid">
+        <article><small>Today’s appointments</small><strong>@Model.Today.Count</strong><span>@Model.Doctor.AvailableFrom–@Model.Doctor.AvailableTo</span></article>
+        <article><small>Upcoming</small><strong>@Model.Upcoming.Count</strong><span>Next scheduled visits</span></article>
+        <article><small>Total patients</small><strong>@Model.TotalPatients</strong><span>Unique patients seen</span></article>
+        <article><small>Availability</small><strong class="status-word">@(Model.Doctor.IsAvailable ? "Open" : "Paused")</strong><span>Patient booking status</span></article>
+    </div>
+    <div class="portal-grid">
+        <section class="portal-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Today</p><h2>Your schedule</h2></div><span>@DateTime.Today.ToString("dddd, d MMMM")</span></div>
+            @if (Model.Today.Count == 0)
+            {
+                <div class="empty-state"><strong>No appointments today</strong><p>Your schedule is clear. Upcoming bookings will appear here.</p></div>
+            }
+            else
+            {
+                foreach (var appointment in Model.Today)
+                {
+                    <partial name="_AppointmentRow" model="appointment" />
+                }
+            }
+        </section>
+        <aside class="portal-panel">
+            <p class="eyebrow">Coming up</p><h2>Next appointments</h2>
+            @if (Model.Upcoming.Count == 0)
+            {
+                <p class="muted">No upcoming bookings.</p>
+            }
+            else
+            {
+                foreach (var appointment in Model.Upcoming)
+                {
+                    <div class="mini-appointment"><span>@appointment.Date.ToString("dd MMM")</span><div><strong>@appointment.User.FullName</strong><small>@appointment.Time · @appointment.Reason</small></div></div>
+                }
+            }
+        </aside>
+    </div>
+</div></section>

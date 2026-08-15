@@ -1,0 +1,8 @@
+@model DoctorAvailabilityViewModel
+@{ ViewData["Title"] = "Availability"; }
+<section class="portal-hero compact"><div class="container"><div><p class="eyebrow">Doctor workspace</p><h1>Availability</h1><p>Explore the availability controls without saving changes.</p></div></div></section><div class="container"><partial name="_DoctorNav"/></div>
+<section class="portal-content"><div class="container narrow"><form class="panel-form availability-form" asp-action="Availability" method="post" asp-antiforgery="false">
+@if (ViewBag.Saved == true) { <div class="success">Availability preview updated. Nothing was stored.</div> }
+<div class="availability-card"><div><strong>Accept new appointments</strong><p>Toggle the demo booking state.</p></div><label class="switch"><input asp-for="IsAvailable"/><span></span></label></div>
+<div class="hours-grid"><label>Available from<input asp-for="AvailableFrom" type="time"/></label><label>Available until<input asp-for="AvailableTo" type="time"/></label></div><button class="button" type="submit">Update preview</button>
+</form></div></section>

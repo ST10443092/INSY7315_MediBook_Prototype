@@ -1,0 +1,7 @@
+@model DoctorViewModel
+@{ ViewData["Title"] = "Add doctor demo"; }
+<section class="page-hero"><div class="container"><p class="eyebrow">Interactive demo</p><h1>Add a doctor</h1><p>Preview the doctor-entry experience without creating an account or database record.</p></div></section>
+<section class="form-section"><div class="container narrow"><form class="panel-form" asp-action="Add" method="post" asp-antiforgery="false">
+@if (ViewBag.Saved == true) { <div class="success">Demo doctor preview updated.</div> }
+<label>Doctor's full name<input asp-for="Name"/></label><label>Specialty<input asp-for="Specialty"/></label><label>Email<input asp-for="Email"/></label><label>Phone<input asp-for="Phone"/></label><button class="button" type="submit">Preview doctor</button>
+</form></div></section>
